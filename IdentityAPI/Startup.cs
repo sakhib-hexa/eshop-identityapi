@@ -35,7 +35,10 @@ namespace IdentityAPI
 
             services.AddCors(c =>
             {
-                c.AddDefaultPolicy(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+                c.AddPolicy("AllowAll", x =>
+                {
+                    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
             });
 
             services.AddSwaggerGen(c =>
@@ -58,7 +61,7 @@ namespace IdentityAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors();
+            app.UseCors("AllowAll");
 
             app.UseSwagger();
             //if (env.IsDevelopment())
