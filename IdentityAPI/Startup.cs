@@ -33,13 +33,7 @@ namespace IdentityAPI
                 //config.UseInMemoryDatabase("IdentityDb");
             });
 
-            services.AddCors(c =>
-            {
-                c.AddPolicy("AllowAll", x =>
-                {
-                    x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                });
-            });
+            services.AddCors();
 
             services.AddSwaggerGen(c =>
             {
@@ -61,7 +55,9 @@ namespace IdentityAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors("AllowAll");
+             app.UseCors(c=>{
+                c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
 
             app.UseSwagger();
             //if (env.IsDevelopment())
