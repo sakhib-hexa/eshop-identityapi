@@ -34,6 +34,7 @@ namespace IdentityAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<dynamic>> Register(User user)
         {
+            try { 
             TryValidateModel(user);
             if (ModelState.IsValid)
             {
@@ -41,12 +42,17 @@ namespace IdentityAPI.Controllers
                 await db.SaveChangesAsync();
                 return Created("", new
                 {
-                    user.Id, user.Fullname, user.Username, user.Email
+                    user.Id, user.Fullname, user.Username, user.Email,user.Role
                 });
             }
             else
             {
                 return BadRequest(ModelState);
+                }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ModelState); 
             }
         }
 
