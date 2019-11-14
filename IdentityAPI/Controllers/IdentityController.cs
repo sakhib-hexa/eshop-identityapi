@@ -90,9 +90,7 @@ namespace IdentityAPI.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             claims.Add(new Claim(JwtRegisteredClaimNames.Aud, "catalogapi"));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Aud, "paymentapi"));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Aud, "basketapi"));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Aud, "orderapi"));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Aud, "bookingapi"));
             claims.Add(new Claim(ClaimTypes.Role, user.Role));
             
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetValue<string>("Jwt:secret")));
